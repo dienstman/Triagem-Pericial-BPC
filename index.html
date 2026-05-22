@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação Perícia Médica - BPC</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonte Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Ocultar setas de input number no Chrome/Safari/Edge */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        /* Ocultar setas de input number no Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans pb-24 selection:bg-indigo-100">
+
+    <!-- Header Moderno -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-20 px-6 py-4 shadow-sm">
+        <div class="max-w-3xl mx-auto flex items-center gap-3">
+            <div class="bg-indigo-600 p-2 rounded-xl shadow-indigo-200 shadow-md">
+                <!-- Ícone BrainCircuit em SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></svg>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold text-gray-900 leading-tight">Avaliação perícia médica - BPC</h1>
+                <p class="text-sm text-gray-500 font-medium">Triagem e preparação do cliente</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto p-4 sm:p-6 mt-4 space-y-8">
+        
+        <!-- Card de Idade e Filtros Moderno -->
+        <section class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full -z-10 opacity-50"></div>
+            
+            <div class="flex items-center gap-2 mb-6">
+                <!-- Ícone Filter em SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-600"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                <h2 class="text-lg font-semibold text-gray-800">Filtros da Avaliação</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+                <div class="group">
+                    <label class="block text-sm font-semibold text-gray-600 mb-2 transition-colors group-focus-within:text-indigo-600">
+                        Anos de Idade
+                    </label>
+                    <input 
+                        type="number" 
+                        id="ageYears"
+                        min="0"
+                        placeholder="Ex: 5"
+                        class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none text-lg font-medium text-gray-800"
+                    />
+                </div>
+
+                <div class="group">
+                    <label class="block text-sm font-semibold text-gray-600 mb-2 transition-colors group-focus-within:text-indigo-600">
+                        Meses
+                    </label>
+                    <input 
+                        type="number" 
+                        id="ageMonths"
+                        min="0"
+                        max="11"
+                        placeholder="Ex: 4"
+                        class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none text-lg font-medium text-gray-800"
+                    />
+                </div>
+
+                <div class="group">
+                    <label class="block text-sm font-semibold text-gray-600 mb-2 transition-colors group-focus-within:text-indigo-600">
+                        Categoria da Função
+                    </label>
+                    <select 
+                        id="categorySelect"
+                        class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none text-sm sm:text-base font-medium text-gray-800 cursor-pointer"
+                    >
+                        <!-- Options injetadas via JS -->
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Listagem de Funções -->
+        <section id="mainSection">
+            <!-- Estado Vazio -->
+            <div id="emptyState" class="text-center py-16 px-6 bg-white rounded-2xl border border-gray-200 border-dashed">
+                <!-- Ícone Activity em SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-300 mx-auto mb-4"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                <h3 class="text-lg font-medium text-gray-900 mb-1">Aguardando dados</h3>
+                <p class="text-gray-500">Informe a idade acima para carregar o questionário adaptado do INSS.</p>
+            </div>
+
+            <!-- Lista Populada -->
+            <div id="questionsWrapper" class="space-y-6 hidden">
+                <div class="flex items-center justify-between pb-2 border-b border-gray-200">
+                    <h2 class="text-lg font-bold text-gray-800">
+                        Questionário Adaptado
+                    </h2>
+                    <span id="questionCount" class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full">
+                        0 tópicos
+                    </span>
+                </div>
+
+                <div id="questionsContainer" class="space-y-4">
+                    <!-- Cards injetados via JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Dados das Questões
+        const mentalFunctions = [
+            // Funções Mentais (47 - 64)
+            { id: 47, title: "Funções da consciência", description: "Vigília, obnubilação, coma, estado vegetativo, estado de alerta, delírio, entre outras.", code: "b110", minAgeMonths: 0, ageLabel: "Geral" },
+            { id: 48, title: "Funções de orientação", description: "Conhecimento e determinação da relação da pessoa consigo própria, com outras pessoas, objetos, espaço, tempo e/ou ambiente.", code: "b114", minAgeMonths: 6, ageLabel: "A partir de 6 meses" },
+            { id: 49, title: "Funções intelectuais", description: "Várias funções mentais integradas, incluindo as funções cognitivas e seu desenvolvimento. Verificar: deficiência intelectual, transtorno mental, demência.", code: "b117", minAgeMonths: 6, ageLabel: "A partir de 6 meses" },
+            { id: 50, title: "Funções psicossociais globais", description: "Habilidades interpessoais necessárias para interações sociais recíprocas (significado, adaptabilidade, responsividade, persistência).", code: "b122, b125", minAgeMonths: 12, ageLabel: "A partir de 1 ano" },
+            { id: 51, title: "Funções do temperamento e personalidade", description: "Extroversão, introversão, amabilidade, responsabilidade, estabilidade psíquica e emocional, abertura a novas experiências, otimismo.", code: "b126", minAgeMonths: 60, ageLabel: "A partir de 5 anos" },
+            { id: 52, title: "Funções da energia e de impulsos", description: "Nível de energia, motivação, apetite, desejo intenso/dependência, controle de impulsos.", code: "b130", minAgeMonths: 60, ageLabel: "A partir de 5 anos" },
+            { id: 53, title: "Funções do sono", description: "Início, manutenção, quantidade e qualidade do sono.", code: "b134", minAgeMonths: 0, ageLabel: "Geral" },
+            { id: 54, title: "Funções da atenção", description: "Concentração, distração e distúrbios da atenção.", code: "b140", minAgeMonths: 6, ageLabel: "A partir de 6 meses" },
+            { id: 55, title: "Funções da memória", description: "Distúrbios da memória recente, remota e amnésica.", code: "b144", minAgeMonths: 36, ageLabel: "A partir de 3 anos" },
+            { id: 56, title: "Funções psicomotoras", description: "Atraso psicomotor, controle e coordenação, marcha, postura, ecolalia, ecopraxia, agitação, catatonia, negativismo, convulsão.", code: "b147", minAgeMonths: 3, ageLabel: "A partir de 3 meses" },
+            { id: 57, title: "Funções da emoção", description: "Adequação, regulação e amplitude da emoção (tristeza, medo, raiva, ansiedade, apatia, labilidade emocional, depressão).", code: "b152", minAgeMonths: 84, ageLabel: "A partir de 7 anos" },
+            { id: 58, title: "Funções da percepção", description: "Reconhecimento e interpretação de estímulos sensoriais (audição, visão, olfato, paladar, tato) e posição de objetos (ex: alucinações).", code: "b156", minAgeMonths: 3, ageLabel: "A partir de 3 meses" },
+            { id: 59, title: "Funções do pensamento", description: "Delírios, obsessões e compulsões, bloqueio, incoerência, fuga de ideias, entre outras.", code: "b160", minAgeMonths: 84, ageLabel: "A partir de 7 anos" },
+            { id: 60, title: "Funções cognitivas básicas", description: "Conhecimento sobre objetos, eventos e experiências, e organização/aplicação desse conhecimento em tarefas.", code: "b163", minAgeMonths: 36, ageLabel: "A partir de 3 anos" },
+            { id: 61, title: "Funções cognitivas superiores", description: "Pensamento abstrato, organização de ideias, tomada de decisão, planejamento, execução, julgamento, flexibilidade mental, autoconhecimento.", code: "b164", minAgeMonths: 120, ageLabel: "A partir de 10 anos" },
+            { id: 62, title: "Funções mentais da linguagem", description: "Recepção e expressão de linguagem gestual, decodificação e produção de mensagens de gestos.", code: "b167", minAgeMonths: 24, ageLabel: "A partir de 2 anos" },
+            { id: 63, title: "Funções de cálculo", description: "Operações matemáticas simples e complexas.", code: "b172", minAgeMonths: 84, ageLabel: "A partir de 7 anos" },
+            { id: 64, title: "Funções da experiência pessoal e de tempo", description: "Consciência da própria identidade, representação e consciência do corpo, duração e passagem do tempo.", code: "b180", minAgeMonths: 36, ageLabel: "A partir de 3 anos" },
+            
+            // Funções Sensoriais da Visão (65 - 67)
+            { id: 65, title: "Funções da visão", description: "Qualidade, acuidade, percepção de luz e cor, visão monocular e binocular, miopia, cegueira, etc.", code: "b210", minAgeMonths: 0, ageLabel: "Geral" },
+            { id: 66, title: "Estruturas adjacentes ao olho", description: "Acomodação, reflexo pupilar, pálpebra, nistagmo, estrabismo, glândulas lacrimonasais.", code: "b215", minAgeMonths: 0, ageLabel: "Geral" },
+            { id: 67, title: "Sensações associadas ao olho", description: "Pressão, cansaço, ressecamento, prurido, irritação, queimação, entre outras.", code: "b220", minAgeMonths: 0, ageLabel: "Geral" },
+            
+            // Funções Sensoriais da Audição (68 - 70)
+            { id: 68, title: "Funções auditivas", description: "Detecção, discriminação e localização do som e da fala, insuficiência e perda da audição.", code: "b230", minAgeMonths: 0, ageLabel: "Geral" },
+            { id: 69, title: "Funções vestibulares", description: "Determinação da posição, equilíbrio e movimentação do corpo.", code: "b235", minAgeMonths: 0, ageLabel: "Geral" },
+            { id: 70, title: "Sensações associadas à audição e função vestibular", description: "Tontura, sensação de queda, vibração, vertigem, zumbido, irritação e pressão auricular.", code: "b240", minAgeMonths: 0, ageLabel: "Geral" },
+            
+            // Sensações Adicionais e Dor (71 - 74)
+            { id: 71, title: "Funções gustativas e olfativas", description: "Capacidade de sentir sabores e cheiros.", code: "b250 / b255", minAgeMonths: 12, ageLabel: "A partir de 1 ano" },
+            { id: 72, title: "Funções proprioceptivas", description: "Percepção da posição relativa de partes do corpo.", code: "b260", minAgeMonths: 12, ageLabel: "A partir de 1 ano" },
+            { id: 73, title: "Função tátil e temperatura", description: "Anestesia, parestesia, sensibilidade à temperatura, vibração, pressão.", code: "b265 / b270", minAgeMonths: 6, ageLabel: "A partir de 6 meses" },
+            { id: 74, title: "Sensação de dor", description: "Dor generalizada ou localizada, analgesia, hipoalgesia, hiperalgesia.", code: "b280", minAgeMonths: 0, ageLabel: "Geral" },
+            
+            // Funções da Voz e da Fala (75 - 77)
+            { id: 75, title: "Funções da voz", description: "Produção e qualidade da voz, disfonia, afonia, rouquidão, hiponasalidade.", code: "b310", minAgeMonths: 0, ageLabel: "Geral" },
+            { id: 76, title: "Funções da articulação", description: "Produção de sons da fala, disartria, anartria, articulação de fonemas.", code: "b320", minAgeMonths: 12, ageLabel: "A partir de 1 ano" },
+            { id: 77, title: "Funções da fluência e ritmo da fala", description: "Alterações na fluência, gagueira, verborreia, dislalia.", code: "b330", minAgeMonths: 24, ageLabel: "A partir de 2 anos" },
+            
+            // Sistema Cardiovascular (78 - 80)
+            { id: 78, title: "Funções do coração", description: "Ritmo, frequência, contratilidade, insuficiência, isquemia, bloqueio.", code: "b410", minAgeMonths: 0, ageLabel: "Geral" },
+            { id: 79, title: "Funções dos vasos sanguíneos", description: "Valvulares, arteriais, venosas e capilares.", code: "b415", minAgeMonths: 0, ageLabel: "Geral" },
+            { id: 80, title: "Funções da pressão sanguínea", description: "Hipotensão, hipertensão.", code: "b420", minAgeMonths: 0, ageLabel: "Geral" },
+            
+            // Sistema Hematológico (81)
+            { id: 81, title: "Funções da produção de sangue", description: "Medula óssea, baço, transporte de oxigênio (anemias, linfomas, doença falciforme, etc.).", code: "b430", minAgeMonths: 0, ageLabel: "Geral" },
+            
+            // Sistema Imunológico (82)
+            { id: 82, title: "Funções do sistema imunológico", description: "Doença autoimune, imunossupressão, câncer, alergias, linfedema.", code: "b435", minAgeMonths: 0, ageLabel: "Geral" },
+            
+            // Sistema Respiratório (83)
+            { id: 83, title: "Funções respiratórias", description: "Frequência, ritmo, profundidade e dificuldades (dispneia, asma, etc.).", code: "b440", minAgeMonths: 0, ageLabel: "Geral" },
+            
+            // Sistema Digestivo e Metabólico (84 - 87)
+            { id: 84, title: "Funções de ingestão", description: "Sucção, mastigação, deglutição, regurgitação, vômito.", code: "b510", minAgeMonths: 0, ageLabel: "Geral" },
+            { id: 85, title: "Funções digestivas", description: "Peristalse, absorção dos nutrientes, tolerância aos alimentos.", code: "b515", minAgeMonths: 0, ageLabel: "Geral" },
+            { id: 87, title: "Funções de manutenção de peso", description: "Baixo peso, caquexia, obesidade.", code: "b530", minAgeMonths: 0, ageLabel: "Geral" },
+            
+            // Neuromusculoesqueléticas (94 - 97)
+            { id: 94, title: "Funções das articulações e ossos", description: "Mobilidade das articulações e dos ossos.", code: "b710 / b715", minAgeMonths: 0, ageLabel: "Geral" },
+            { id: 95, title: "Funções musculares", description: "Relacionadas à força, ao tônus e à resistência muscular.", code: "b730 / b740", minAgeMonths: 0, ageLabel: "Geral" },
+            { id: 96, title: "Funções dos movimentos", description: "Reflexos motores e movimentos involuntários, controle voluntário.", code: "b750 / b765", minAgeMonths: 0, ageLabel: "Geral" },
+            { id: 97, title: "Padrão da marcha", description: "Deficiências como marcha espástica, paraplégica.", code: "b770", minAgeMonths: 0, ageLabel: "Geral" },
+            
+            // Funções da Pele (98)
+            { id: 98, title: "Funções da pele e fâneros", description: "Psoríase, dermatite, albinismo, vitiligo, queimaduras.", code: "b810 a b850", minAgeMonths: 0, ageLabel: "Geral" },
+            
+            // Aprendizagem e Conhecimento (99 - 109)
+            { id: 99, title: "Utilizar intencionalmente a visão", description: "Seguir objeto visualmente, observar pessoas ou brincadeiras.", code: "d110", minAgeMonths: 12, ageLabel: "A partir de 1 ano" },
+            { id: 100, title: "Utilizar intencionalmente a audição", description: "Ouvir rádio, música, voz humana.", code: "d115", minAgeMonths: 6, ageLabel: "A partir de 6 meses" },
+            { id: 101, title: "Percepções sensoriais intencionais", description: "Tocar, sentir texturas, explorar com a boca e nariz.", code: "d120", minAgeMonths: 6, ageLabel: "A partir de 6 meses" },
+            { id: 102, title: "Imitar ou copiar aprendizagem", description: "Aprender brincando, copiar gesto ou jogos de faz de conta.", code: "d130", minAgeMonths: 6, ageLabel: "A partir de 6 meses" },
+            { id: 103, title: "Adquirir linguagem", description: "Representar pessoas ou sentimentos por palavras ou gestos.", code: "d133", minAgeMonths: 24, ageLabel: "A partir de 2 anos" },
+            { id: 104, title: "Adquirir conceitos", description: "Tamanho, forma, quantidade, igual/diferente.", code: "d137", minAgeMonths: 36, ageLabel: "A partir de 3 anos" },
+            { id: 105, title: "Aprender a ler", description: "Compreender vocábulos, frases e textos.", code: "d140", minAgeMonths: 72, ageLabel: "A partir de 6 anos" },
+            { id: 106, title: "Aprender a escrever", description: "Compreender o significado ao escrever.", code: "d145", minAgeMonths: 72, ageLabel: "A partir de 6 anos" },
+            { id: 107, title: "Aprender a calcular", description: "Compreender símbolos e operações matemáticas.", code: "d150", minAgeMonths: 72, ageLabel: "A partir de 6 anos" },
+            { id: 108, title: "Adquirir e executar habilidades", description: "Básicas (usar talheres) e complexas (jogos, ferramentas).", code: "d155", minAgeMonths: 24, ageLabel: "A partir de 2 anos" },
+            { id: 109, title: "Concentração e solução de problemas", description: "Concentrar atenção, encontrar solução e tomar decisões.", code: "d160", minAgeMonths: 84, ageLabel: "A partir de 7 anos" },
+            
+            // Tarefas e Demandas Gerais (110 - 112)
+            { id: 110, title: "Realizar uma única tarefa", description: "Atender a comando simples, pegar um objeto.", code: "d210", minAgeMonths: 6, ageLabel: "A partir de 6 meses" },
+            { id: 111, title: "Realizar tarefas múltiplas e rotina", description: "Atender comandos múltiplos, realizar rotina diária.", code: "d220", minAgeMonths: 84, ageLabel: "A partir de 7 anos" },
+            { id: 112, title: "Gerenciar comportamento e emoções", description: "Gerenciar de forma coerente com a idade.", code: "d250", minAgeMonths: 84, ageLabel: "A partir de 7 anos" },
+            
+            // Comunicação (113 - 120)
+            { id: 113, title: "Recepção de mensagens orais", description: "Compreender o significado de uma frase falada.", code: "d310", minAgeMonths: 12, ageLabel: "A partir de 1 ano" },
+            { id: 114, title: "Recepção de mensagens não verbais", description: "Compreender gestos, expressões faciais.", code: "d315", minAgeMonths: 24, ageLabel: "A partir de 2 anos" },
+            { id: 117, title: "Dificuldade na fala", description: "Produção de palavras ou frases compreensíveis.", code: "d330", minAgeMonths: 12, ageLabel: "A partir de 1 ano" },
+            { id: 118, title: "Produção de mensagens não verbais", description: "Usar gestos ou desenhos para se comunicar.", code: "d335", minAgeMonths: 12, ageLabel: "A partir de 1 ano" },
+            { id: 120, title: "Dificuldade na conversação", description: "Iniciar, manter e finalizar uma troca de ideias.", code: "d350", minAgeMonths: 36, ageLabel: "A partir de 3 anos" },
+            
+            // Mobilidade (121 - 125)
+            { id: 121, title: "Mudar posição básica do corpo", description: "Levantar, ajoelhar, agachar, deitar e/ou rolar.", code: "d410", minAgeMonths: 6, ageLabel: "A partir de 6 meses" },
+            { id: 122, title: "Mover-se na mesma superfície", description: "Mover-se sem mudar a posição do corpo.", code: "d420", minAgeMonths: 36, ageLabel: "A partir de 3 anos" },
+            { id: 123, title: "Manusear e mover objetos", description: "Manusear brinquedos ou objetos com movimentos finos.", code: "d430", minAgeMonths: 6, ageLabel: "A partir de 6 meses" },
+            { id: 124, title: "Dificuldade para andar", description: "Mover-se a pé sem auxílio.", code: "d450", minAgeMonths: 24, ageLabel: "A partir de 2 anos" },
+            { id: 125, title: "Deslocar-se com equipamento", description: "Andador, cadeira de rodas, muletas, bengala.", code: "d465", minAgeMonths: 36, ageLabel: "A partir de 3 anos" },
+            
+            // Cuidado Pessoal (126 - 129)
+            { id: 126, title: "Cuidados com o próprio corpo", description: "Lavar, secar, limpar dentes e higiene geral.", code: "d510", minAgeMonths: 60, ageLabel: "A partir de 5 anos" },
+            { id: 127, title: "Dificuldade para se vestir", description: "Colocar e tirar roupas apropriadas.", code: "d540", minAgeMonths: 36, ageLabel: "A partir de 3 anos" },
+            { id: 128, title: "Comer e beber sem auxílio", description: "Coordenar os gestos para comer e beber.", code: "d550", minAgeMonths: 36, ageLabel: "A partir de 3 anos" },
+            { id: 129, title: "Dificuldade para evitar exposição a riscos", description: "Evitar abusos e situações perigosas.", code: "d571", minAgeMonths: 84, ageLabel: "A partir de 7 anos" }
+        ];
+
+        // Definição de Níveis e Categorias
+        const assessmentLevels = [
+            { id: 'none', label: 'Sem alteração', activeClass: 'bg-emerald-100 text-emerald-800 border-emerald-300 ring-emerald-500' },
+            { id: 'low', label: 'Baixa', activeClass: 'bg-amber-100 text-amber-800 border-amber-300 ring-amber-500' },
+            { id: 'medium', label: 'Média', activeClass: 'bg-orange-100 text-orange-800 border-orange-300 ring-orange-500' },
+            { id: 'high', label: 'Alta', activeClass: 'bg-rose-100 text-rose-800 border-rose-300 ring-rose-500' }
+        ];
+
+        const categories = [
+            "Todas", "Funções Mentais", "Funções Sensoriais da Visão", "Funções Sensoriais da Audição",
+            "Sensações Adicionais e Dor", "Funções da Voz e da Fala", "Sistema Cardiovascular",
+            "Sistema Hematológico", "Sistema Imunológico", "Sistema Respiratório",
+            "Sistema Digestivo e Metabólico", "Neuromusculoesqueléticas", "Funções da Pele",
+            "Aprendizagem e Conhecimento", "Tarefas e Demandas Gerais", "Comunicação",
+            "Mobilidade", "Cuidado Pessoal"
+        ];
+
+        // Lógica de Categorias por ID
+        const getCategory = (id) => {
+            if (id >= 47 && id <= 64) return "Funções Mentais";
+            if (id >= 65 && id <= 67) return "Funções Sensoriais da Visão";
+            if (id >= 68 && id <= 70) return "Funções Sensoriais da Audição";
+            if (id >= 71 && id <= 74) return "Sensações Adicionais e Dor";
+            if (id >= 75 && id <= 77) return "Funções da Voz e da Fala";
+            if (id >= 78 && id <= 80) return "Sistema Cardiovascular";
+            if (id === 81) return "Sistema Hematológico";
+            if (id === 82) return "Sistema Imunológico";
+            if (id === 83) return "Sistema Respiratório";
+            if (id >= 84 && id <= 87) return "Sistema Digestivo e Metabólico";
+            if (id >= 94 && id <= 97) return "Neuromusculoesqueléticas";
+            if (id === 98) return "Funções da Pele";
+            if (id >= 99 && id <= 109) return "Aprendizagem e Conhecimento";
+            if (id >= 110 && id <= 112) return "Tarefas e Demandas Gerais";
+            if (id >= 113 && id <= 120) return "Comunicação";
+            if (id >= 121 && id <= 125) return "Mobilidade";
+            if (id >= 126 && id <= 129) return "Cuidado Pessoal";
+            return "Outras";
+        };
+
+        // Estado do Aplicativo
+        let state = {
+            answers: {}, // { questionId: levelId }
+            filteredQuestions: []
+        };
+
+        // Elementos DOM
+        const els = {
+            ageYears: document.getElementById('ageYears'),
+            ageMonths: document.getElementById('ageMonths'),
+            categorySelect: document.getElementById('categorySelect'),
+            emptyState: document.getElementById('emptyState'),
+            questionsWrapper: document.getElementById('questionsWrapper'),
+            questionsContainer: document.getElementById('questionsContainer'),
+            questionCount: document.getElementById('questionCount')
+        };
+
+        // Preencher Categorias no Select
+        categories.forEach(cat => {
+            const option = document.createElement('option');
+            option.value = cat;
+            option.textContent = cat;
+            els.categorySelect.appendChild(option);
+        });
+
+        // Event Listeners
+        els.ageYears.addEventListener('input', updateView);
+        els.ageMonths.addEventListener('input', updateView);
+        els.categorySelect.addEventListener('change', updateView);
+
+        // Delegação de Eventos para os botões de resposta
+        els.questionsContainer.addEventListener('click', (e) => {
+            const btn = e.target.closest('.answer-btn');
+            if (!btn) return;
+            
+            const qId = parseInt(btn.dataset.qid);
+            const levelId = btn.dataset.level;
+            
+            state.answers[qId] = levelId;
+            updateButtonsDOM(qId);
+        });
+
+        function updateView() {
+            const years = els.ageYears.value.trim() === '' ? -1 : parseInt(els.ageYears.value);
+            const months = els.ageMonths.value.trim() === '' ? -1 : parseInt(els.ageMonths.value);
+            
+            // Verifica se pelo menos um dos campos foi preenchido com números válidos
+            if (years === -1 && months === -1) {
+                els.emptyState.classList.remove('hidden');
+                els.questionsWrapper.classList.add('hidden');
+                return;
+            }
+
+            const safeYears = years > 0 ? years : 0;
+            const safeMonths = months > 0 ? months : 0;
+            const totalMonths = (safeYears * 12) + safeMonths;
+            const selectedCategory = els.categorySelect.value;
+
+            // Filtro
+            state.filteredQuestions = mentalFunctions.filter(q => {
+                const matchesAge = totalMonths >= q.minAgeMonths;
+                const matchesCategory = selectedCategory === 'Todas' || getCategory(q.id) === selectedCategory;
+                return matchesAge && matchesCategory;
+            });
+
+            // Atualiza UI
+            els.emptyState.classList.add('hidden');
+            els.questionsWrapper.classList.remove('hidden');
+            els.questionCount.textContent = `${state.filteredQuestions.length} tópicos`;
+            
+            renderQuestions();
+        }
+
+        // SVG string para o ícone de informação
+        const infoIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-1"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`;
+
+        function renderQuestions() {
+            els.questionsContainer.innerHTML = state.filteredQuestions.map(q => {
+                const categoryName = getCategory(q.id);
+                
+                // Gera HTML dos botões
+                const buttonsHtml = assessmentLevels.map(level => {
+                    return `
+                        <button
+                            data-qid="${q.id}"
+                            data-level="${level.id}"
+                            class="answer-btn btn-q${q.id}-${level.id} relative py-2.5 px-3 rounded-xl text-sm font-semibold transition-all duration-200 ease-in-out border bg-white text-gray-600 border-gray-200 hover:bg-gray-100 hover:border-gray-300"
+                        >
+                            ${level.label}
+                        </button>
+                    `;
+                }).join('');
+
+                return `
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:border-indigo-200 transition-colors">
+                        <div class="p-5 sm:p-6 pb-4">
+                            <div class="flex justify-between items-start gap-4 mb-3">
+                                <h3 class="font-bold text-gray-900 text-lg leading-snug">
+                                    <span class="text-indigo-600 mr-1">${q.id}.</span> 
+                                    ${q.title}
+                                </h3>
+                                <span class="shrink-0 inline-flex items-center bg-gray-100 text-gray-600 text-[11px] uppercase tracking-wider font-bold px-2.5 py-1 rounded-md">
+                                    ${infoIconSvg} ${q.ageLabel}
+                                </span>
+                            </div>
+                            
+                            <p class="text-gray-600 text-sm leading-relaxed mb-1">
+                                ${q.description}
+                            </p>
+                            
+                            <div class="flex flex-wrap items-center gap-3 mt-2">
+                                <p class="text-xs font-mono font-medium text-gray-400">
+                                    CIF: ${q.code}
+                                </p>
+                                <span class="text-xs font-semibold text-indigo-500 bg-indigo-50 px-2 py-0.5 rounded-md">
+                                    ${categoryName}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 p-3 sm:p-4 border-t border-gray-100">
+                            <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 px-1">
+                                Nível de Alteração
+                            </p>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 question-btns-${q.id}">
+                                ${buttonsHtml}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Restaura o estado visual dos botões após a renderização
+            state.filteredQuestions.forEach(q => {
+                if (state.answers[q.id]) {
+                    updateButtonsDOM(q.id);
+                }
+            });
+        }
+
+        function updateButtonsDOM(questionId) {
+            const container = document.querySelector(`.question-btns-${questionId}`);
+            if (!container) return;
+
+            const selectedLevelId = state.answers[questionId];
+            const buttons = container.querySelectorAll('.answer-btn');
+
+            buttons.forEach(btn => {
+                const btnLevelId = btn.dataset.level;
+                const levelConfig = assessmentLevels.find(l => l.id === btnLevelId);
+                
+                // Reseta classes
+                btn.className = `answer-btn btn-q${questionId}-${btnLevelId} relative py-2.5 px-3 rounded-xl text-sm font-semibold transition-all duration-200 ease-in-out border`;
+                
+                if (btnLevelId === selectedLevelId) {
+                    btn.className += ` ${levelConfig.activeClass} shadow-sm ring-1 ring-offset-1`;
+                } else {
+                    btn.className += ` bg-white text-gray-600 border-gray-200 hover:bg-gray-100 hover:border-gray-300`;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
